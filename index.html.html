@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* PASSWORD */
+#lock{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#ff4d6d,#ff758c);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    z-index:10;
+}
+
+input{
+    padding:12px;
+    border-radius:20px;
+    border:none;
+    text-align:center;
+    width:220px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 25px;
+    border-radius:25px;
+    border:none;
+    background:white;
+    color:#ff4d6d;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* CARD */
+.card{
+    background:white;
+    width:90%;
+    max-width:380px;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.name{
+    font-size:18px;
+    color:#ff4d6d;
+    font-weight:bold;
+}
+
+/* SLIDESHOW */
+.slideshow{
+    width:100%;
+    height:170px;
+    border-radius:15px;
+    overflow:hidden;
+    margin:10px 0;
+}
+.slideshow img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    display:none;
+}
+
+/* CAKE */
+.cake{
+    margin:10px auto;
+}
+.candle-num{
+    font-size:34px;
+    font-weight:bold;
+    color:#ff4d6d;
+}
+.flame{
+    width:14px;
+    height:20px;
+    background:orange;
+    border-radius:50%;
+    margin:5px auto;
+    animation:flicker .3s infinite;
+}
+@keyframes flicker{
+    50%{transform:scale(1.3);}
+}
+
+/* FINAL MESSAGE */
+#finalMsg{
+    display:none;
+    margin-top:15px;
+    font-size:14px;
+    color:#444;
+    animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* BALLOON */
+.balloon{
+    position:absolute;
+    bottom:-40px;
+    width:30px;
+    height:40px;
+    border-radius:50%;
+    animation:float 6s linear forwards;
+}
+@keyframes float{
+    to{transform:translateY(-120vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+    <h2>🔐 Password</h2>
+    <input type="password" id="pass" placeholder="Masukkan password">
+    <button onclick="unlock()">Buka 💖</button>
+</div>
+
+<!-- MAIN -->
+<div class="card">
+    <h2>🎉 Selamat Ulang Tahun 🎂</h2>
+    <div class="name">Dari seseorang yang spesial 💖</div>
+
+    <!-- FOTO -->
+    <div class="slideshow">
+        <img src="foto1.jpg">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+        <img src="foto4.jpg">
+        <img src="foto5.jpg">
+        <img src="foto6.jpg">
+        <img src="foto7.jpg">
+        <img src="foto8.jpg">
+    </div>
+
+    <!-- CAKE -->
+    <div class="cake">
+        <div class="candle-num">1&nbsp;9</div>
+        <div class="flame" id="flame"></div>
+    </div>
+
+    <p id="text">Siap untuk kejutan kecil? 💕</p>
+    <button id="btn" onclick="nextStep()">Mulai 💝</button>
+
+    <!-- PESAN -->
+    <div id="finalMsg">
+        <b>Selamat ulang tahun, sayangku 🤍</b><br><br>
+
+        Di umurmu yang ke-19 ini, aku berdoa semoga kamu selalu  
+        diberi kesehatan, panjang umur, rezeki yang lancar,  
+        dan hati yang selalu dipenuhi kebahagiaan.<br><br>
+
+        Terima kasih sudah hadir di hidupku,  
+        sudah menemani hari-hariku,  
+        dan sudah menjadi rumah untuk hati yang sering lelah ini.<br><br>
+
+        Aku ingin tumbuh bareng kamu,  
+        saling menggenggam tangan saat senang maupun sulit,  
+        dan saling menguatkan sampai akhir hayat nanti.<br><br>
+
+        Aku sayang kamu, lebih dari yang bisa aku ungkapkan 🤍<br><br>
+
+        <b>— From fayruz zam🤍</b>
+    </div>
+</div>
+
+<!-- LAGU HAPPY BIRTHDAY -->
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c1e3b0b9a.mp3">
+</audio>
+
+<script>
+/* SLIDESHOW */
+let slides=document.querySelectorAll(".slideshow img");
+let s=0;
+slides[0].style.display="block";
+setInterval(()=>{
+    slides[s].style.display="none";
+    s=(s+1)%slides.length;
+    slides[s].style.display="block";
+},2500);
+
+/* PASSWORD */
+function unlock(){
+    if(document.getElementById("pass").value==="ifa sayang"){
+        document.getElementById("lock").style.display="none";
+    }else{
+        alert("Password salah 💔");
+    }
+}
+
+/* STEP BUTTON */
+let step=0;
+function nextStep(){
+    const text=document.getElementById("text");
+    const btn=document.getElementById("btn");
+    step++;
+
+    if(step===1){
+        text.innerHTML="Pencet sekali lagi ya sayang, ga bakal nyesel kok 💕";
+    }
+    else if(step===2){
+        text.innerHTML="Pencet tombolnya lagi ya sayang, semangat sayangku 💖";
+        btn.innerText="Terakhir 🎁";
+    }
+    else{
+        // PLAY MUSIC
+        document.getElementById("music").play();
+
+        // BALLOONS
+        for(let i=0;i<20;i++){
+            let b=document.createElement("div");
+            b.className="balloon";
+            b.style.left=Math.random()*100+"vw";
+            b.style.background=`hsl(${Math.random()*360},80%,60%)`;
+            document.body.appendChild(b);
+            setTimeout(()=>b.remove(),6000);
+        }
+
+        // LILIN MATI
+        setTimeout(()=>{
+            document.getElementById("flame").style.display="none";
+            document.getElementById("finalMsg").style.display="block";
+            btn.style.display="none";
+            text.style.display="none";
+        },2000);
+    }
+}
+</script>
+
+</body>
+</html>
